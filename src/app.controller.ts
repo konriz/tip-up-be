@@ -1,12 +1,28 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Body, Controller, Get, Post } from "@nestjs/common";
+import { AppService } from "./app.service";
+import { TipJar } from "./schema/tip-jar.schema";
+import { Owner } from "./schema/owner.schema";
+import { TipCreateDto } from "./dto/tip-create.dto";
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) {
+  }
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Get() getTipJarsList(): Promise<TipJar[]> {
+    return this.appService.getTipJarsList();
+  }
+
+  @Get("owners") getOwnersList(): Promise<string[]> {
+    return this.appService.getOwnersNamesList();
+  }
+
+  @Post("owners") createNewAccount(@Body() ownerDto: Owner): Promise<TipJar> {
+    return this.appService.createNewAccount(ownerDto);
+  }
+
+  @Post() sendTip(@Body() tipCreateDto: TipCreateDto): Promise<void> {
+    return this.appService.sendTip(tipCreateDto);
   }
 }
+

@@ -1,10 +1,14 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { MongooseModule } from "@nestjs/mongoose";
+import { TipJar, TipJarSchema } from "./schema/tip-jar.schema";
 
 @Module({
-  imports: [],
+  imports: [MongooseModule.forRoot("mongodb://localhost/nest"),
+    MongooseModule.forFeature([{name: TipJar.name, schema: TipJarSchema}])],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
-export class AppModule {}
+export class AppModule {
+}
