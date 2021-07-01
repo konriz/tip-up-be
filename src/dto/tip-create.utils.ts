@@ -15,6 +15,6 @@ export class TipCreateUtils {
   static toTip(tip: TipCreateDto): Tip {
     const from = {name: tip.fromName} as Owner;
     const to = {name: tip.toName} as Owner;
-    return {from, to, amount: tip.amount, message: tip.message} as Tip
+    return {from, to, amount: tip.amount, message: tip.message} as unknown as Tip
   }
 }

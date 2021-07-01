@@ -1,6 +1,6 @@
 export class TipCreateDto {
   amount: number;
-  message: number;
+  message: string;
   fromName: string;
   secret: string;
   toName: string;

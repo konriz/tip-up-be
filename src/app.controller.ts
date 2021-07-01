@@ -24,5 +24,8 @@ export class AppController {
   @Post() sendTip(@Body() tipCreateDto: TipCreateDto): Promise<void> {
     return this.appService.sendTip(tipCreateDto);
   }
-}
 
+  @Post("login") login(@Body() ownerDto: Owner) {
+    return this.appService.login(ownerDto);
+  }
+}

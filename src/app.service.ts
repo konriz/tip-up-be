@@ -58,6 +58,17 @@ export class AppService {
       .exec();
   }
 
+  async login(ownerDto: Owner): Promise<Owner> {
+    if (!ownerDto.secret) {
+      throw new UnauthorizedException();
+    }
+    const ownerJar = await this.findDonatorJar(ownerDto.name, ownerDto.secret);
+    if (!ownerJar) {
+      throw new UnauthorizedException();
+    }
+    return ownerJar.owner;
+  }
+
   private async updateDonatorJar(donatorJar: TipJarDocument, tip: Tip) {
     donatorJar.tipsGiven.push(tip);
     return donatorJar.save();
@@ -67,4 +78,6 @@ export class AppService {
     donatorJar.tipsReceived.push(tip);
     return donatorJar.save();
   }
+
+
 }
