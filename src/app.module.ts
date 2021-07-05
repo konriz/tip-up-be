@@ -5,7 +5,7 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { TipJar, TipJarSchema } from "./schema/tip-jar.schema";
 
 @Module({
-  imports: [MongooseModule.forRoot("mongodb://localhost/nest"),
+  imports: [MongooseModule.forRoot("mongodb://mongo/nest"),
     MongooseModule.forFeature([{name: TipJar.name, schema: TipJarSchema}])],
   controllers: [AppController],
   providers: [AppService]

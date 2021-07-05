@@ -16,7 +16,11 @@ export class AppService {
   }
 
   async getTipJarsList(): Promise<TipJar[]> {
-    return this.tipJarModel.find().exec();
+    const tipJars = await this.tipJarModel.find().exec();
+    return tipJars.map(tipJar => {
+      delete tipJar.owner.secret;
+      return tipJar;
+    });
   }
 
   async getOwnersNamesList(): Promise<string[]> {
