@@ -11,7 +11,7 @@ import { JarsController } from "./api/jars/jars.controller";
 import { SecretService } from "./api/owners/secret.service";
 
 @Module({
-  imports: [ConfigModule.forRoot(), MongooseModule.forRoot(process.env.MONGO_URL || "mongodb://localhost/nest"),
+  imports: [ConfigModule.forRoot(), MongooseModule.forRoot(process.env.MONGO_URL || "mongodb://root:example@localhost"),
     MongooseModule.forFeature([{name: TipJar.name, schema: TipJarSchema}])],
   controllers: [JarsController, OwnersController, TipsController],
   providers: [JarsService, OwnersService, TipsService, SecretService]
