@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { TipsService } from "./tips.service";
-import { TipCreateDto } from "../../dto/tip-create.dto";
+import { TipCreateDto } from "./dto/tip-create.dto";
 
 @Controller()
 export class TipsController {

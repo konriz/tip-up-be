@@ -2,8 +2,8 @@ import { BadRequestException, Injectable, NotFoundException, UnauthorizedExcepti
 import { TipJar, TipJarDocument } from "../../schema/tip-jar.schema";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { TipCreateDto } from "../../dto/tip-create.dto";
-import { TipCreateUtils } from "../../dto/tip-create.utils";
+import { TipCreateDto } from "./dto/tip-create.dto";
+import { TipCreateUtils } from "./dto/tip-create.utils";
 import { Tip } from "../../schema/tip.embedded";
 import { OwnersService } from "../owners/owners.service";
 

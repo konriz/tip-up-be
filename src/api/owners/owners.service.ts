@@ -4,18 +4,12 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Owner } from "../../schema/owner.schema";
 import { SecretService } from "./secret.service";
-import { OwnerDto } from "./owner.dto";
+import { OwnerDto } from "./dto/owner.dto";
 
 @Injectable()
 export class OwnersService {
-
   constructor(@InjectModel(TipJar.name) private readonly tipJarModel: Model<TipJarDocument>,
               private readonly secretService: SecretService) {
-  }
-
-  async getOwnersNamesList(): Promise<string[]> {
-    const tipJarsOwners = await this.tipJarModel.find().select("owner.name").exec();
-    return tipJarsOwners.map(tipJar => tipJar.owner.name);
   }
 
   async createNewAccount(ownerDto: OwnerDto) {
