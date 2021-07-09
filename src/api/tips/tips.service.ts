@@ -6,12 +6,13 @@ import { TipCreateDto } from "./dto/tip-create.dto";
 import { TipCreateUtils } from "./dto/tip-create.utils";
 import { Tip } from "../../schema/tip.embedded";
 import { OwnersService } from "../owners/owners.service";
+import { ServerSentEventsService } from "../../events/server-sent-events.service";
 
 @Injectable()
 export class TipsService {
 
   constructor(@InjectModel(TipJar.name) private readonly tipJarModel: Model<TipJarDocument>,
-              private readonly ownersService: OwnersService) {
+              private readonly ownersService: OwnersService, private readonly sseService: ServerSentEventsService) {
   }
 
   async sendTip(tipCreateDto: TipCreateDto) {
@@ -29,6 +30,7 @@ export class TipsService {
     const tip = TipCreateUtils.toTip(tipCreateDto);
     await this.updateDonatorJar(donatorJar, tip);
     await this.updateReceiverJar(receiverJar, tip);
+    this.sseService.pushTipEvent(tip);
   }
 
   private async updateDonatorJar(donatorJar: TipJarDocument, tip: Tip) {

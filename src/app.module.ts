@@ -9,12 +9,14 @@ import { TipsController } from "./api/tips/tips.controller";
 import { OwnersController } from "./api/owners/owners.controller";
 import { JarsController } from "./api/jars/jars.controller";
 import { SecretService } from "./api/owners/secret.service";
+import { ServerSentEventsController } from "./events/server-sent-events.controller";
+import { ServerSentEventsService } from "./events/server-sent-events.service";
 
 @Module({
   imports: [ConfigModule.forRoot(), MongooseModule.forRoot(process.env.MONGO_URL || "mongodb://root:example@localhost"),
     MongooseModule.forFeature([{name: TipJar.name, schema: TipJarSchema}])],
-  controllers: [JarsController, OwnersController, TipsController],
-  providers: [JarsService, OwnersService, TipsService, SecretService]
+  controllers: [JarsController, OwnersController, TipsController, ServerSentEventsController],
+  providers: [JarsService, OwnersService, TipsService, SecretService, ServerSentEventsService]
 })
 export class AppModule {
 }
