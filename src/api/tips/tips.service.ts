@@ -31,6 +31,7 @@ export class TipsService {
     await this.updateDonatorJar(donatorJar, tip);
     await this.updateReceiverJar(receiverJar, tip);
     this.sseService.pushTipEvent(tip);
+    return tip;
   }
 
   private async updateDonatorJar(donatorJar: TipJarDocument, tip: Tip) {
@@ -42,5 +43,4 @@ export class TipsService {
     donatorJar.tipsReceived.push(tip);
     return donatorJar.save();
   }
-
 }
